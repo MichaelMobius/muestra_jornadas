@@ -461,6 +461,105 @@
         min-height: 200px;
       }
     }
+    /* RESPONSIVE PARA EL ENCABEZADO DE OBRAS */
+@media (max-width: 768px) {
+  
+  /* Permite que el subtítulo baje de línea */
+  .section-subtitle {
+    white-space: normal;       /* Rompe la restricción de una sola línea */
+    line-height: 1.5;          /* Mejora la lectura al tener varias líneas */
+    margin-top: 6px;           /* Un poco de espacio arriba */
+    max-width: 100%;           /* Asegura que no exceda el ancho de pantalla */
+  }
+
+  /* Ajusta el contenedor para que no fuerce alineaciones extrañas */
+  .section-header {
+    flex-direction: column;    /* Apila los elementos verticalmente */
+    align-items: flex-start;   /* Alinea todo a la izquierda */
+    gap: 8px;                  /* Espacio entre título y subtítulo */
+  }
+
+  /* Opcional: Ajustar el tamaño de la línea decorativa del título */
+  .section-title::after {
+    width: 20px;               /* Línea más corta en móviles */
+  }
+}
+
+/* --- CONTROLES DE BÚSQUEDA Y FILTRO --- */
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      align-items: center;
+    }
+
+    .control-input, 
+    .control-select, 
+    .control-btn {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    .control-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .control-input {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .control-select {
+      cursor: pointer;
+      min-width: 140px;
+    }
+    
+    .control-select option {
+      background: rgb(0, 47, 167); /* Fondo oscuro para las opciones */
+      color: #fff;
+    }
+
+    .control-btn {
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(5, 186, 165, 0.2); /* Tono teal suave */
+      border-color: var(--accent-teal);
+    }
+
+    .control-btn:hover {
+      background: var(--accent-teal);
+      color: #000;
+    }
+
+    .control-btn.secondary {
+      background: transparent;
+      border-color: rgba(255,255,255,0.3);
+    }
+    .control-btn.secondary:hover {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
   </style>
 </head>
 <body>
@@ -500,7 +599,20 @@
           </p>
         </div>
       </div>
+      <div class="controls">
+        <input type="text" id="searchArtist" class="control-input" placeholder="Buscar por nombre de artista...">
+        
+        <select id="filterCountry" class="control-select">
+          <option value="">Todos los países</option>
+          </select>
 
+        <select id="filterMedium" class="control-select">
+          <option value="">Todos los soportes</option>
+          </select>
+
+        <button id="btnRandom" class="control-btn">Aleatorio ⚄</button>
+        <button id="btnReset" class="control-btn secondary">Ver Todo</button>
+      </div>
       <!-- VISOR DE LA OBRA SELECCIONADA -->
       <div class="viewer" id="viewer">
         <div class="viewer-label">Obra seleccionada</div>
@@ -829,7 +941,7 @@
         <article class="work-card"
           data-title="VULVA"
           data-artist="Aline Macedo"
-          data-country="São Paulo - SP, Brasil"
+          data-country="São Paulo, Brasil"
           data-year="2025"
           data-medium="Libro objeto"
           data-type="pdf"
@@ -846,7 +958,7 @@
         <article class="work-card"
           data-title="BOCA"
           data-artist="Aline Macedo"
-          data-country="São Paulo - SP, Brasil"
+          data-country="São Paulo, Brasil"
           data-year="2025"
           data-medium="Libro objeto"
           data-type="pdf"
@@ -863,7 +975,7 @@
         <article class="work-card"
           data-title="ORGANISMO"
           data-artist="Aline Macedo"
-          data-country="São Paulo - SP, Brasil"
+          data-country="São Paulo, Brasil"
           data-year="2025"
           data-medium="Libro objeto"
           data-type="pdf"
@@ -884,7 +996,7 @@
         <article class="work-card"
           data-title="ESCUTEASCRIANÇAS"
           data-artist="amazonahightech"
-          data-country="Rio de Janeiro, RJ"
+          data-country="Rio de Janeiro, Brasil"
           data-year="2025"
           data-medium=""
           data-type="image"
@@ -901,7 +1013,7 @@
         <article class="work-card"
           data-title="PSYCOPÁSSARO"
           data-artist="amazonahightech"
-          data-country="Rio de Janeiro, RJ"
+          data-country="Rio de Janeiro, Brasil"
           data-year="2025"
           data-medium=""
           data-type="image"
@@ -1321,7 +1433,24 @@
             <span class="work-year">2022</span>
           </div>
           <div class="work-medium">Soporte: por completar</div>
-        </article>        
+        </article>
+
+        <article class="work-card"
+          data-title="Coatlicue"
+          data-artist="AV"
+          data-country="México"
+          data-year="2025"
+          data-medium=""
+          data-type="web"
+          data-src="https://poiesis.viniciusmarquet.com/coatlicue/">
+          <h3 class="work-title">Coatlicue</h3>
+          <div class="work-artist">AV</div>
+          <div class="work-meta-line">
+            <span class="work-country">México</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: por completar</div>
+        </article>                
 
         <article class="work-card"
           data-title="LABERINTO BORGIANO"
@@ -2092,7 +2221,7 @@
         <article class="work-card"
           data-title="Vocales"
           data-artist="Ender Rodriguez"
-          data-country="San Cristobal, Venezuela."
+          data-country="San Cristobal, Venezuela"
           data-year="2025"
           data-medium=""
           data-type="image"
@@ -2100,7 +2229,7 @@
           <h3 class="work-title">Vocales</h3>
           <div class="work-artist">Ender Rodriguez</div>
           <div class="work-meta-line">
-            <span class="work-country">San Cristobal, Venezuela.</span>
+            <span class="work-country">San Cristobal, Venezuela</span>
             <span class="work-year">2025</span>
           </div>
           <div class="work-medium">Soporte: por completar</div>
@@ -2857,7 +2986,7 @@
         <article class="work-card"
           data-title="Teclado para escribir poesia"
           data-artist="javier alejandro robledo"
-          data-country="buenos aires, argentina"
+          data-country="Buenos Aires, Argentina"
           data-year="2000"
           data-medium="Poesía visual digital"
           data-type="image"
@@ -2865,7 +2994,7 @@
           <h3 class="work-title">Teclado para escribir poesia</h3>
           <div class="work-artist">javier alejandro robledo</div>
           <div class="work-meta-line">
-            <span class="work-country">buenos aires, argentina</span>
+            <span class="work-country">Buenos Aires, Argentina</span>
             <span class="work-year">2000</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual digital</div>
@@ -2874,7 +3003,7 @@
         <article class="work-card"
           data-title="Samsara"
           data-artist="javier alejandro robledo"
-          data-country="buenos aires, argentina"
+          data-country="Buenos Aires, Argentina"
           data-year="1999"
           data-medium="Poesía visual digital"
           data-type="image"
@@ -2882,7 +3011,7 @@
           <h3 class="work-title">Samsara</h3>
           <div class="work-artist">javier alejandro robledo</div>
           <div class="work-meta-line">
-            <span class="work-country">buenos aires, argentina</span>
+            <span class="work-country">Buenos Aires, Argentina</span>
             <span class="work-year">1999</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual digital</div>
@@ -2891,7 +3020,7 @@
         <article class="work-card"
           data-title="Diccionario comentado por un poeta (tomo lll)"
           data-artist="javier alejandro robledo"
-          data-country="buenos aires, argentina"
+          data-country="Buenos Aires, Argentina"
           data-year="2021"
           data-medium="Poesía visual digital"
           data-type="image"
@@ -2899,7 +3028,7 @@
           <h3 class="work-title">Diccionario comentado por un poeta (tomo lll)</h3>
           <div class="work-artist">javier alejandro robledo</div>
           <div class="work-meta-line">
-            <span class="work-country">buenos aires, argentina</span>
+            <span class="work-country">Buenos Aires, Argentina</span>
             <span class="work-year">2021</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual digital</div>
@@ -2946,7 +3075,7 @@
           data-year="2024"
           data-medium="Poesía visual digital"
           data-type="image"
-          data-src="imgs/aragão_violencia_2024 - José Carlos Aragão.jpg">
+          data-src="imgs/aragão_ cordilheira_2024 - José Carlos Aragão.jpg">
           <h3 class="work-title">Cordilheira</h3>
           <div class="work-artist">José Carlos Aragão</div>
           <div class="work-meta-line">
@@ -3146,7 +3275,7 @@
         <article class="work-card"
           data-title="Pontodevista"
           data-artist="Júlia da Rocha"
-          data-country="são paulo, brasil"
+          data-country="São Paulo, Brasil"
           data-year="2020"
           data-medium="Poesía visual digital (PDF)"
           data-type="pdf"
@@ -3154,7 +3283,7 @@
           <h3 class="work-title">Pontodevista</h3>
           <div class="work-artist">Júlia da Rocha</div>
           <div class="work-meta-line">
-            <span class="work-country">são paulo, brasil</span>
+            <span class="work-country">São Paulo, Brasil</span>
             <span class="work-year">2020</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual digital (PDF)</div>
@@ -4067,8 +4196,8 @@
           data-country="Los Angeles, EUA"
           data-year="2025"
           data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/LINO_RUMOR_2025 - Patrícia Lino.pdf">
+          data-type="web"
+          data-src="https://e.issuu.com/embed.html?backgroundColor=%23191919&pubId=d064699db10558eced63f3ca57ca01ce">
           <h3 class="work-title">Rumor</h3>
           <div class="work-artist">Patrícia Lino</div>
           <div class="work-meta-line">
@@ -4085,7 +4214,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/CASTILLO_PEQUEÑA BESTIA_2025 - paula castillo.JPG">
+          data-src="imgs/CASTILLO_PEQUEÑA BESTIA_2025 - paula castillo.JPG">
           <h3 class="work-title">Pequeña Bestia</h3>
           <div class="work-artist">PAULA CASTILLO</div>
           <div class="work-meta-line">
@@ -4104,23 +4233,6 @@
           data-type="image"
           data-src="imgs/CASTILLO_LA LIBERTAD Y EL PRESAGIO_2025 - paula castillo.JPG">
           <h3 class="work-title">La libertad y el presagio</h3>
-          <div class="work-artist">PAULA CASTILLO</div>
-          <div class="work-meta-line">
-            <span class="work-country">Bogotá, Colombia</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Pequeña Bestia II"
-          data-artist="PAULA CASTILLO"
-          data-country="Bogotá, Colombia"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/CASTILLO_PEQUEÑA BESTIA2_2025 - paula castillo.JPG">
-          <h3 class="work-title">Pequeña Bestia II</h3>
           <div class="work-artist">PAULA CASTILLO</div>
           <div class="work-meta-line">
             <span class="work-country">Bogotá, Colombia</span>
@@ -4153,7 +4265,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/AQUARONE_RELÓGIO_2025 - Paulo Aquarone.jpg">
+          data-src="imgs/AQUARONE_RELÓGIO_2025 - Paulo Aquarone.jpg">
           <h3 class="work-title">Relógio</h3>
           <div class="work-artist">Paulo Aquarone</div>
           <div class="work-meta-line">
@@ -4215,48 +4327,14 @@
         </article>
 
         <article class="work-card"
-          data-title="Faixa de Gaza (1)"
-          data-artist="Paulo Roberto de Carvalho Barbosa"
-          data-country="Belo Horizonte, Brasil"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/PAULOBARBOSA_FAIXADEGAZA_2025 - Paulo Roberto de Carvalho Barbosa_1.jpg">
-          <h3 class="work-title">Faixa de Gaza (1)</h3>
-          <div class="work-artist">Paulo Roberto de Carvalho Barbosa</div>
-          <div class="work-meta-line">
-            <span class="work-country">Belo Horizonte, Brasil</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Supermercado"
-          data-artist="Paulo Roberto de Carvalho Barbosa"
-          data-country="Belo Horizonte, Brasil"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/PAULOBARBOSA_SUPERMERCADO_2025 - Paulo Roberto de Carvalho Barbosa.jpg">
-          <h3 class="work-title">Supermercado</h3>
-          <div class="work-artist">Paulo Roberto de Carvalho Barbosa</div>
-          <div class="work-meta-line">
-            <span class="work-country">Belo Horizonte, Brasil</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Faixa de Gaza (2)"
+          data-title="Faixa de Gaza"
           data-artist="Paulo Roberto de Carvalho Barbosa"
           data-country="Belo Horizonte, Brasil"
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
           data-src="imgs/PAULOBARBOSA_FAIXADEGAZA_2025 - Paulo Roberto de Carvalho Barbosa.jpg">
-          <h3 class="work-title">Faixa de Gaza (2)</h3>
+          <h3 class="work-title">Faixa de Gaza</h3>
           <div class="work-artist">Paulo Roberto de Carvalho Barbosa</div>
           <div class="work-meta-line">
             <span class="work-country">Belo Horizonte, Brasil</span>
@@ -4272,7 +4350,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/PAULOBARBOSA_CLASSEMÉDIA_2025 - Paulo Roberto de Carvalho Barbosa.jpg">
+          data-src="imgs/PAULOBARBOSA_CLASSEMÉDIA_2025 - Paulo Roberto de Carvalho Barbosa.jpg">
           <h3 class="work-title">Classe Média</h3>
           <div class="work-artist">Paulo Roberto de Carvalho Barbosa</div>
           <div class="work-meta-line">
@@ -4357,7 +4435,7 @@
           data-year="2023"
           data-medium="Poesía visual"
           data-type="pdf"
-          data-src="pdfs/PASSOS_DANTAS_A MÁQUINA DO MUNDO REPISADA_2023 - Rafael Passos.pdf">
+          data-src="pdfs/PASSOS_DANTAS_A MÁQUINA DO MUNDO REPISADA_2023 - Rafael Passos.pdf">
           <h3 class="work-title">A Máquina do Mundo Repisada</h3>
           <div class="work-artist">Rafael Passos</div>
           <div class="work-meta-line">
@@ -4391,7 +4469,7 @@
           data-year="2017"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Raimon Blu_Fútil_2017 - Raimon Blu.jpg">
+          data-src="imgs/Raimon Blu_Fútil_2017 - Raimon Blu.jpg">
           <h3 class="work-title">Fútil</h3>
           <div class="work-artist">RAMÓN PEÑA OLIVER</div>
           <div class="work-meta-line">
@@ -4425,7 +4503,7 @@
           data-year="2017"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/GIANCOTTI_DIÁLOGO_2017 - Rivaldo Giancotti.jpg">
+          data-src="imgs/GIANCOTTI_DIÁLOGO_2017 - Rivaldo Giancotti.jpg">
           <h3 class="work-title">Diálogo</h3>
           <div class="work-artist">Rivaldo Silveira do Espírito Santo Jr</div>
           <div class="work-meta-line">
@@ -4459,7 +4537,7 @@
           data-year="1985"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/GIANCOTTI_NOITEÉOOUTROLADODODIAÉOOUTROLADODA_1985 - Rivaldo Giancotti.jpg">
+          data-src="imgs/GIANCOTTI_NOITEÉOOUTROLADODODIAÉOOUTROLADODA_1985 - Rivaldo Giancotti.jpg">
           <h3 class="work-title">Noite é o Outro Lado do Dia</h3>
           <div class="work-artist">Rivaldo Silveira do Espírito Santo Jr</div>
           <div class="work-meta-line">
@@ -4493,25 +4571,8 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="pdf"
-          data-src="pdfs/Keppler   clip-poema      NUNCA EXISTE - roberto KEPPLER.pdf">
+          data-src="pdfs/Keppler   clip-poema     NUNCA EXISTE - roberto KEPPLER.pdf">
           <h3 class="work-title">Nunca Existe (Clip-Poema)</h3>
-          <div class="work-artist">ROBERTO KEPPLER</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual (PDF)</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Meshi Performance Brain Cell"
-          data-artist="ROBERTO KEPPLER"
-          data-country="São Paulo, Brasil"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/Meshi performance Brain Cell - roberto KEPPLER.pdf">
-          <h3 class="work-title">Meshi Performance Brain Cell</h3>
           <div class="work-artist">ROBERTO KEPPLER</div>
           <div class="work-meta-line">
             <span class="work-country">São Paulo, Brasil</span>
@@ -4538,30 +4599,13 @@
         </article>
 
         <article class="work-card"
-          data-title="Clip"
-          data-artist="ROBERTO KEPPLER"
-          data-country="São Paulo, Brasil"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/Keppler    clip - roberto KEPPLER.pdf">
-          <h3 class="work-title">Clip</h3>
-          <div class="work-artist">ROBERTO KEPPLER</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual (PDF)</div>
-        </article>
-
-        <article class="work-card"
           data-title="Desterritorialização da Antropofagia Capital"
           data-artist="Rosana Schmitt"
           data-country="Rodeio, Brasil"
           data-year="2025"
           data-medium="Poesía visual"
           data-type="pdf"
-          data-src="pdfs/Schmitt Desterritorialização da Antropofagia Capital 2025 - Anna Flávia Schmitt Wyse Baranski.pdf">
+          data-src="pdfs/Schmitt Desterritorialização da Antropofagia Capital 2025 - Anna Flávia Schmitt Wyse Baranski.pdf">
           <h3 class="work-title">Desterritorialização da Antropofagia Capital</h3>
           <div class="work-artist">Rosana Schmitt</div>
           <div class="work-meta-line">
@@ -4595,7 +4639,7 @@
           data-year="2023"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/souza_sem título!_2023 - Rosilene Souza.jpg">
+          data-src="imgs/souza_sem título!_2023 - Rosilene Souza.jpg">
           <h3 class="work-title">Sem Título</h3>
           <div class="work-artist">Rosilene Aparecida de Souza</div>
           <div class="work-meta-line">
@@ -4612,7 +4656,7 @@
           data-year="2024"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/souza_apropriações PÓ-éticas constitucionais!_2024 - Rosilene Souza.jpeg">
+          data-src="imgs/souza_apropriações PÓ-éticas constitucionais!_2024 - Rosilene Souza.jpeg">
           <h3 class="work-title">Apropriações PÓ-éticas Constitucionais</h3>
           <div class="work-artist">Rosilene Aparecida de Souza</div>
           <div class="work-meta-line">
@@ -4629,7 +4673,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/totem - Rubén Gil (INDETERMEDIARIO).png">
+          data-src="imgs/totem - Rubén Gil (INDETERMEDIARIO).png">
           <h3 class="work-title">Totem</h3>
           <div class="work-artist">Rubén Gil-Moreno</div>
           <div class="work-meta-line">
@@ -4646,7 +4690,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/lupe - Rubén Gil (INDETERMEDIARIO).png">
+          data-src="imgs/lupe - Rubén Gil (INDETERMEDIARIO).png">
           <h3 class="work-title">Lupe</h3>
           <div class="work-artist">Rubén Gil-Moreno</div>
           <div class="work-meta-line">
@@ -4663,7 +4707,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/wera - Rubén Gil (INDETERMEDIARIO).png">
+          data-src="imgs/wera - Rubén Gil (INDETERMEDIARIO).png">
           <h3 class="work-title">Wera</h3>
           <div class="work-artist">Rubén Gil-Moreno</div>
           <div class="work-meta-line">
@@ -4680,7 +4724,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="pdf"
-          data-src="pdfs/LHIMMA_BIOGRAFÍA MUDA_2025 - Santiago Lhimma.pdf">
+          data-src="pdfs/LHIMMA_BIOGRAFÍA MUDA_2025 - Santiago Lhimma.pdf">
           <h3 class="work-title">Biografía Muda</h3>
           <div class="work-artist">Santiago Lhimma</div>
           <div class="work-meta-line">
@@ -4742,40 +4786,6 @@
         </article>
 
         <article class="work-card"
-          data-title="IMG 6285"
-          data-artist="Sebastián de la Fuente Cienfuegos"
-          data-country="Santiago, Chile"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/IMG_6285 - Sebastian De La Fuente Cienfuegos.jpg">
-          <h3 class="work-title">IMG 6285</h3>
-          <div class="work-artist">Sebastián de la Fuente Cienfuegos</div>
-          <div class="work-meta-line">
-            <span class="work-country">Santiago, Chile</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="IMG 6303"
-          data-artist="Sebastián de la Fuente Cienfuegos"
-          data-country="Santiago, Chile"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/IMG_6303 - Sebastian De La Fuente Cienfuegos.jpg">
-          <h3 class="work-title">IMG 6303</h3>
-          <div class="work-artist">Sebastián de la Fuente Cienfuegos</div>
-          <div class="work-meta-line">
-            <span class="work-country">Santiago, Chile</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
           data-title="Lluvia"
           data-artist="Sebastián de la Fuente Cienfuegos"
           data-country="Santiago, Chile"
@@ -4793,64 +4803,13 @@
         </article>
 
         <article class="work-card"
-          data-title="IMG 6305"
-          data-artist="Sebastián de la Fuente Cienfuegos"
-          data-country="Santiago, Chile"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/IMG_6305 - Sebastian De La Fuente Cienfuegos.jpg">
-          <h3 class="work-title">IMG 6305</h3>
-          <div class="work-artist">Sebastián de la Fuente Cienfuegos</div>
-          <div class="work-meta-line">
-            <span class="work-country">Santiago, Chile</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="IMG 6284"
-          data-artist="Sebastián de la Fuente Cienfuegos"
-          data-country="Santiago, Chile"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/IMG_6284 - Sebastian De La Fuente Cienfuegos.jpg">
-          <h3 class="work-title">IMG 6284</h3>
-          <div class="work-artist">Sebastián de la Fuente Cienfuegos</div>
-          <div class="work-meta-line">
-            <span class="work-country">Santiago, Chile</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Blood Oil"
-          data-artist="Sergio Araht"
-          data-country="Guadalajara, México"
-          data-year="2024"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Araht_BloodOil_2024 - Sergio Araht Ortíz Rosales.jpg">
-          <h3 class="work-title">Blood Oil</h3>
-          <div class="work-artist">Sergio Araht</div>
-          <div class="work-meta-line">
-            <span class="work-country">Guadalajara, México</span>
-            <span class="work-year">2024</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
           data-title="Latinoamérica"
           data-artist="Sergio Araht"
           data-country="Guadalajara, México"
           data-year="2022"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Araht_Latinoámerica_2022 - Sergio Araht Ortíz Rosales.jpg">
+          data-src="imgs/Araht_Latinoámerica_2022 - Sergio Araht Ortíz Rosales.jpg">
           <h3 class="work-title">Latinoamérica</h3>
           <div class="work-artist">Sergio Araht</div>
           <div class="work-meta-line">
@@ -4867,7 +4826,7 @@
           data-year="2022"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Araht_México_2022 - Sergio Araht Ortíz Rosales.jpg">
+          data-src="imgs/Araht_México_2022 - Sergio Araht Ortíz Rosales.jpg">
           <h3 class="work-title">México</h3>
           <div class="work-artist">Sergio Araht</div>
           <div class="work-meta-line">
@@ -4884,25 +4843,8 @@
           data-year="2022"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Araht_MuerteMexicana_2022 - Sergio Araht Ortíz Rosales.jpg">
+          data-src="imgs/Araht_MuerteMexicana_2022 - Sergio Araht Ortíz Rosales.jpg">
           <h3 class="work-title">Muerte Mexicana</h3>
-          <div class="work-artist">Sergio Araht</div>
-          <div class="work-meta-line">
-            <span class="work-country">Guadalajara, México</span>
-            <span class="work-year">2022</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Dos Problemas"
-          data-artist="Sergio Araht"
-          data-country="Guadalajara, México"
-          data-year="2022"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Araht_DosProblemas_2022 - Sergio Araht Ortíz Rosales.jpg">
-          <h3 class="work-title">Dos Problemas</h3>
           <div class="work-artist">Sergio Araht</div>
           <div class="work-meta-line">
             <span class="work-country">Guadalajara, México</span>
@@ -4918,7 +4860,7 @@
           data-year="2023"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/BONZON_POEMA 6_2023 - Sergio Bonzón.jpg">
+          data-src="imgs/BONZON_POEMA 6_2023 - Sergio Bonzón.jpg">
           <h3 class="work-title">Poema 6</h3>
           <div class="work-artist">Sergio Bonzón</div>
           <div class="work-meta-line">
@@ -4935,7 +4877,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/BONZON_POEMACON PUNTO VERDE_2025 - Sergio Bonzón.jpg">
+          data-src="imgs/BONZON_POEMACON PUNTO VERDE_2025 - Sergio Bonzón.jpg">
           <h3 class="work-title">Poema con Punto Verde</h3>
           <div class="work-artist">Sergio Bonzón</div>
           <div class="work-meta-line">
@@ -4952,7 +4894,7 @@
           data-year="2020"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/BONZON_POEMA 5-OBLIVION_2020 - Sergio Bonzón.jpg">
+          data-src="imgs/BONZON_POEMA 5-OBLIVION_2020 - Sergio Bonzón.jpg">
           <h3 class="work-title">Poema 5 Oblivion</h3>
           <div class="work-artist">Sergio Bonzón</div>
           <div class="work-meta-line">
@@ -4986,7 +4928,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/STEVZ_OLHOS_20252 - Estêvão Vieira.png">
+          data-src="imgs/STEVZ_OLHOS_20252 - Estêvão Vieira.png">
           <h3 class="work-title">Olhos</h3>
           <div class="work-artist">Stêvz</div>
           <div class="work-meta-line">
@@ -5003,7 +4945,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/STEVZ_GIRA_2025 - Estêvão Vieira.png">
+          data-src="imgs/STEVZ_GIRA_2025 - Estêvão Vieira.png">
           <h3 class="work-title">Gira</h3>
           <div class="work-artist">Stêvz</div>
           <div class="work-meta-line">
@@ -5011,23 +4953,6 @@
             <span class="work-year">2025</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Errar e Rir"
-          data-artist="Surian dos Santos"
-          data-country="Rio de Janeiro, Brasil"
-          data-year="2024"
-          data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/DOSSANTOS_ERRAR E RIR_2024 - Surian dos Santos.pdf">
-          <h3 class="work-title">Errar e Rir</h3>
-          <div class="work-artist">Surian dos Santos</div>
-          <div class="work-meta-line">
-            <span class="work-country">Rio de Janeiro, Brasil</span>
-            <span class="work-year">2024</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual (PDF)</div>
         </article>
 
         <article class="work-card"
@@ -5082,32 +5007,15 @@
         </article>
 
         <article class="work-card"
-          data-title="Chua"
-          data-artist="Surian dos Santos"
-          data-country="Rio de Janeiro, Brasil"
-          data-year="2024"
-          data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/DOSSANTOS_CHUA_2024 - Surian dos Santos.pdf">
-          <h3 class="work-title">Chua</h3>
-          <div class="work-artist">Surian dos Santos</div>
-          <div class="work-meta-line">
-            <span class="work-country">Rio de Janeiro, Brasil</span>
-            <span class="work-year">2024</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual (PDF)</div>
-        </article>
-
-        <article class="work-card"
           data-title="Monturos"
-          data-artist="Tchello"
+          data-artist="Tchello d'Barros"
           data-country="Rio de Janeiro, Brasil"
           data-year="2024"
           data-medium="Poesía visual"
           data-type="image"
           data-src="imgs/D'BARROS__MONTUROS_2024 - Tchello d'Barros.jpg">
           <h3 class="work-title">Monturos</h3>
-          <div class="work-artist">Tchello</div>
+          <div class="work-artist">Tchello d'Barros</div>
           <div class="work-meta-line">
             <span class="work-country">Rio de Janeiro, Brasil</span>
             <span class="work-year">2024</span>
@@ -5117,14 +5025,14 @@
 
         <article class="work-card"
           data-title="R de Refugiados"
-          data-artist="Tchello"
+          data-artist="Tchello d'Barros"
           data-country="Rio de Janeiro, Brasil"
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
           data-src="imgs/D'BARROS_RDEREFUGIADOS_2025 - Tchello d'Barros.jpg">
           <h3 class="work-title">R de Refugiados</h3>
-          <div class="work-artist">Tchello</div>
+          <div class="work-artist">Tchello d'Barros</div>
           <div class="work-meta-line">
             <span class="work-country">Rio de Janeiro, Brasil</span>
             <span class="work-year">2025</span>
@@ -5134,14 +5042,14 @@
 
         <article class="work-card"
           data-title="(R)Evolucionar"
-          data-artist="Tchello"
+          data-artist="Tchello d'Barros"
           data-country="Rio de Janeiro, Brasil"
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
           data-src="imgs/D'BARROS_(R)EVOLUCIONAR_2025 - Tchello d'Barros.jpg">
           <h3 class="work-title">(R)Evolucionar</h3>
-          <div class="work-artist">Tchello</div>
+          <div class="work-artist">Tchello d'Barros</div>
           <div class="work-meta-line">
             <span class="work-country">Rio de Janeiro, Brasil</span>
             <span class="work-year">2025</span>
@@ -5201,23 +5109,6 @@
         </article>
 
         <article class="work-card"
-          data-title="Flamingos"
-          data-artist="Thomas William Gabriel Wray"
-          data-country="São Paulo, Brasil"
-          data-year="2023"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/flamingos_2023 - Tom Wray_1.jpg">
-          <h3 class="work-title">Flamingos</h3>
-          <div class="work-artist">Thomas William Gabriel Wray</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2023</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
           data-title="Flamingos (Versión 2)"
           data-artist="Thomas William Gabriel Wray"
           data-country="São Paulo, Brasil"
@@ -5230,40 +5121,6 @@
           <div class="work-meta-line">
             <span class="work-country">São Paulo, Brasil</span>
             <span class="work-year">2023</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Quando a torre caiu"
-          data-artist="Thomas William Gabriel Wray"
-          data-country="São Paulo, Brasil"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Wray_.Quando a torre caiu as abelhas escreveram poesia na sombra_2025 - Tom Wray_1.jpg">
-          <h3 class="work-title">Quando a torre caiu</h3>
-          <div class="work-artist">Thomas William Gabriel Wray</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Poema Corte e Colar"
-          data-artist="Thomas William Gabriel Wray"
-          data-country="São Paulo, Brasil"
-          data-year="2024"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/wray_poema corte e colar_2024 - Tom Wray_1.jpg">
-          <h3 class="work-title">Poema Corte e Colar</h3>
-          <div class="work-artist">Thomas William Gabriel Wray</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2024</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual</div>
         </article>
@@ -5298,23 +5155,6 @@
           <div class="work-meta-line">
             <span class="work-country">São Paulo, Brasil</span>
             <span class="work-year">2024</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Latinoamérica"
-          data-artist="Tulio Restrepo"
-          data-country="Medellín, Colombia"
-          data-year="2014"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Tulio Restrepo_LatiNOamérica_2014 - Tulio Restrepo Echeverri.jpg">
-          <h3 class="work-title">Latinoamérica</h3>
-          <div class="work-artist">Tulio Restrepo</div>
-          <div class="work-meta-line">
-            <span class="work-country">Medellín, Colombia</span>
-            <span class="work-year">2014</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual</div>
         </article>
@@ -5372,14 +5212,14 @@
 
         <article class="work-card"
           data-title="Poema Corpo"
-          data-artist="Um Que Com Acento Circunflexo"
+          data-artist="Lara Teixeira"
           data-country="São Paulo, Brasil"
           data-year="2022"
           data-medium="Poesía visual"
           data-type="image"
           data-src="imgs/Lara Teixeira_poemacorpo,2022 - Lara Dias.jpg">
           <h3 class="work-title">Poema Corpo</h3>
-          <div class="work-artist">Um Que Com Acento Circunflexo</div>
+          <div class="work-artist">Lara Teixeira</div>
           <div class="work-meta-line">
             <span class="work-country">São Paulo, Brasil</span>
             <span class="work-year">2022</span>
@@ -5389,48 +5229,14 @@
 
         <article class="work-card"
           data-title="Quem não mama"
-          data-artist="Um Que Com Acento Circunflexo"
-          data-country="São Paulo, Brasil"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/poema  quem não mama - Lara Dias.png">
-          <h3 class="work-title">Quem não mama</h3>
-          <div class="work-artist">Um Que Com Acento Circunflexo</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Poema Trama"
-          data-artist="Um Que Com Acento Circunflexo"
-          data-country="São Paulo, Brasil"
-          data-year="2019"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Lara Teixeira_poematrama,2019 - Lara Dias.jpg">
-          <h3 class="work-title">Poema Trama</h3>
-          <div class="work-artist">Um Que Com Acento Circunflexo</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2019</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Poela Quem Não Mama"
-          data-artist="Um Que Com Acento Circunflexo"
+          data-artist="Lara Teixeira"
           data-country="São Paulo, Brasil"
           data-year="2024"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Lara teixeira_poelaquemnãomama,2024 - Lara Dias.png">
-          <h3 class="work-title">Poela Quem Não Mama</h3>
-          <div class="work-artist">Um Que Com Acento Circunflexo</div>
+          data-src="imgs/Lara teixeira_poelaquemnãomama,2024 - Lara Dias.png">
+          <h3 class="work-title">Quem não mama</h3>
+          <div class="work-artist">Lara Teixeira</div>
           <div class="work-meta-line">
             <span class="work-country">São Paulo, Brasil</span>
             <span class="work-year">2024</span>
@@ -5439,35 +5245,18 @@
         </article>
 
         <article class="work-card"
-          data-title="Imagem para miragem"
-          data-artist="Um Que Com Acento Circunflexo"
+          data-title="Poema Trama"
+          data-artist="Lara Teixeira"
           data-country="São Paulo, Brasil"
-          data-year="2025"
+          data-year="2019"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/imagem para miragem - Lara Dias.png">
-          <h3 class="work-title">Imagem para miragem</h3>
-          <div class="work-artist">Um Que Com Acento Circunflexo</div>
+          data-src="imgs/Lara Teixeira_poematrama,2019 - Lara Dias.jpg">
+          <h3 class="work-title">Poema Trama</h3>
+          <div class="work-artist">Lara Teixeira</div>
           <div class="work-meta-line">
             <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Trama"
-          data-artist="Um Que Com Acento Circunflexo"
-          data-country="São Paulo, Brasil"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/trama - Lara Dias.jpg">
-          <h3 class="work-title">Trama</h3>
-          <div class="work-artist">Um Que Com Acento Circunflexo</div>
-          <div class="work-meta-line">
-            <span class="work-country">São Paulo, Brasil</span>
-            <span class="work-year">2025</span>
+            <span class="work-year">2019</span>
           </div>
           <div class="work-medium">Soporte: Poesía visual</div>
         </article>
@@ -5479,7 +5268,7 @@
           data-year="2022"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Morales_eyex_2022 - Bernardo Morales González.jpg">
+          data-src="imgs/Morales_eyex_2022 - Bernardo Morales González.jpg">
           <h3 class="work-title">Eyex</h3>
           <div class="work-artist">v1xWaL</div>
           <div class="work-meta-line">
@@ -5496,7 +5285,7 @@
           data-year="2025"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Morales_QueDa la Locura_2025 - Bernardo Morales González.jpeg">
+          data-src="imgs/Morales_QueDa la Locura_2025 - Bernardo Morales González.jpeg">
           <h3 class="work-title">Que Da la Locura</h3>
           <div class="work-artist">v1xWaL</div>
           <div class="work-meta-line">
@@ -5513,7 +5302,7 @@
           data-year="2024"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Morales_xWaL_2024 - Bernardo Morales González.jpeg">
+          data-src="imgs/Morales_xWaL_2024 - Bernardo Morales González.jpeg">
           <h3 class="work-title">xWaL</h3>
           <div class="work-artist">v1xWaL</div>
           <div class="work-meta-line">
@@ -5524,30 +5313,13 @@
         </article>
 
         <article class="work-card"
-          data-title="WifiPoema"
-          data-artist="Víctor Armando Mancilla Ríos"
-          data-country="CDMX, México"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/MANCILLA_wifiPoema_2025 - Armando Mancilla.pdf">
-          <h3 class="work-title">WifiPoema</h3>
-          <div class="work-artist">Víctor Armando Mancilla Ríos</div>
-          <div class="work-meta-line">
-            <span class="work-country">CDMX, México</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual (PDF)</div>
-        </article>
-
-        <article class="work-card"
           data-title="Códigos Artísticos (Compilación)"
           data-artist="Víctor Armando Mancilla Ríos"
           data-country="CDMX, México"
           data-year="2025"
           data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Nefemov-compilación-enprocesodepoemas-codigosartisticos2025 - NEF MOVING.jpg">
+          data-type="web"
+          data-src="https://nefemov.com/serpientesycalabozos/index.html">
           <h3 class="work-title">Códigos Artísticos (Compilación)</h3>
           <div class="work-artist">Víctor Armando Mancilla Ríos</div>
           <div class="work-meta-line">
@@ -5558,30 +5330,13 @@
         </article>
 
         <article class="work-card"
-          data-title="Padre Nuestre"
-          data-artist="Víctor Armando Mancilla Ríos"
-          data-country="CDMX, México"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/MANCILLA_PadreNuestre_2025 - Armando Mancilla.pdf">
-          <h3 class="work-title">Padre Nuestre</h3>
-          <div class="work-artist">Víctor Armando Mancilla Ríos</div>
-          <div class="work-meta-line">
-            <span class="work-country">CDMX, México</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual (PDF)</div>
-        </article>
-
-        <article class="work-card"
           data-title="Cantares de la Ballena Electromagnética"
           data-artist="Víctor Armando Mancilla Ríos"
           data-country="CDMX, México"
           data-year="2020"
           data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Nefemov-CantaresdelaBallenaElectromagnetica-2020 - NEF MOVING.jpg">
+          data-type="web"
+          data-src="https://nefemov.com/ballenaElectromagnetica/">
           <h3 class="work-title">Cantares de la Ballena Electromagnética</h3>
           <div class="work-artist">Víctor Armando Mancilla Ríos</div>
           <div class="work-meta-line">
@@ -5592,47 +5347,13 @@
         </article>
 
         <article class="work-card"
-          data-title="Terrible Juego de Mesa"
-          data-artist="Víctor Armando Mancilla Ríos"
-          data-country="CDMX, México"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Nefemov.Com-TerribleJuegodeMesa-2025 - NEF MOVING.jpg">
-          <h3 class="work-title">Terrible Juego de Mesa</h3>
-          <div class="work-artist">Víctor Armando Mancilla Ríos</div>
-          <div class="work-meta-line">
-            <span class="work-country">CDMX, México</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual</div>
-        </article>
-
-        <article class="work-card"
-          data-title="Fuego"
-          data-artist="Víctor Armando Mancilla Ríos"
-          data-country="CDMX, México"
-          data-year="2025"
-          data-medium="Poesía visual"
-          data-type="pdf"
-          data-src="pdfs/MANCILLA_FUEGO_2025 - Armando Mancilla.pdf">
-          <h3 class="work-title">Fuego</h3>
-          <div class="work-artist">Víctor Armando Mancilla Ríos</div>
-          <div class="work-meta-line">
-            <span class="work-country">CDMX, México</span>
-            <span class="work-year">2025</span>
-          </div>
-          <div class="work-medium">Soporte: Poesía visual (PDF)</div>
-        </article>
-
-        <article class="work-card"
           data-title="Otrx Fe"
           data-artist="Víctor Armando Mancilla Ríos"
           data-country="CDMX, México"
           data-year="2020"
           data-medium="Poesía visual"
-          data-type="image"
-          data-src="imgs/Nefemov-otrxFe-2020 - NEF MOVING.jpg">
+          data-type="web"
+          data-src="https://nefemov.com/deidadesUnisex/indexCompu.html">
           <h3 class="work-title">Otrx Fe</h3>
           <div class="work-artist">Víctor Armando Mancilla Ríos</div>
           <div class="work-meta-line">
@@ -5649,7 +5370,7 @@
           data-year="2021"
           data-medium="Poesía visual"
           data-type="image"
-          data-src="imgs/Vidal,AMOR.2021jpeg - Victor Vidal.jpeg">
+          data-src="imgs/Vidal,AMOR. 2021jpeg - Victor Vidal.jpeg">
           <h3 class="work-title">AMOR</h3>
           <div class="work-artist">Víctor Valqui Vidal</div>
           <div class="work-meta-line">
@@ -5727,6 +5448,244 @@
           <div class="work-medium">Soporte: Poesía visual</div>
         </article>
 
+        <article class="work-card"
+          data-title="Liberación de las palabras"
+          data-artist="Victor Villarreal Velasco"
+          data-country="Guadalajara, México"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="image"
+          data-src="imgs/Kiss - victor vv.jpg">
+          <h3 class="work-title">Liberación de las palabras</h3>
+          <div class="work-artist">Victor Villarreal Velasco</div>
+          <div class="work-meta-line">
+            <span class="work-country">Guadalajara, México</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>
+
+        <article class="work-card"
+          data-title="Saída à direira"
+          data-artist="W. ASSIS"
+          data-country="São Paulo, Brasil"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="image"
+          data-src="imgs/W. ASSIS, Brasil, Saída à direira, 2025 - WASHINGTON LL DE ASSIS.jpg">
+          <h3 class="work-title">Saída à direira</h3>
+          <div class="work-artist">W. ASSIS</div>
+          <div class="work-meta-line">
+            <span class="work-country">São Paulo, Brasil</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>        
+
+        <article class="work-card"
+          data-title="Miscigenação"
+          data-artist="W. ASSIS"
+          data-country="São Paulo, Brasil"
+          data-year="2022"
+          data-medium="Poesía visual"
+          data-type="image"
+          data-src="imgs/W. ASSIS, Brasil, Título Miscigenação, 2022 - WASHINGTON LL DE ASSIS.png">
+          <h3 class="work-title">Miscigenação</h3>
+          <div class="work-artist">W. ASSIS</div>
+          <div class="work-meta-line">
+            <span class="work-country">São Paulo, Brasil</span>
+            <span class="work-year">2022</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>
+
+        <article class="work-card"
+          data-title="Por um fio"
+          data-artist="W. ASSIS"
+          data-country="São Paulo, Brasil"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="image"
+          data-src="imgs/W. ASSIS, Brasil, título Por um fio, 2025 - WASHINGTON LL DE ASSIS.png">
+          <h3 class="work-title">Por um fio</h3>
+          <div class="work-artist">W. ASSIS</div>
+          <div class="work-meta-line">
+            <span class="work-country">São Paulo, Brasil</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>        
+
+        <article class="work-card"
+          data-title="In América"
+          data-artist="Wilton Cruz"
+          data-country="São Paulo, Brasil"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="pdf"
+          data-src="pdfs/Cruz - In América - 2025_20250831_225319_0000 - wilton cruz.pdf">
+          <h3 class="work-title">In América</h3>
+          <div class="work-artist">Wilton Cruz</div>
+          <div class="work-meta-line">
+            <span class="work-country">São Paulo, Brasil</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>
+
+        <article class="work-card"
+          data-title="In Permanência"
+          data-artist="Wilton Cruz"
+          data-country="São Paulo, Brasil"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="pdf"
+          data-src="pdfs/Cruz - In Permanência - 2025_20250831_224239_0000 - wilton cruz.pdf">
+          <h3 class="work-title">In Permanência</h3>
+          <div class="work-artist">Wilton Cruz</div>
+          <div class="work-meta-line">
+            <span class="work-country">São Paulo, Brasil</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>
+
+        <article class="work-card"
+          data-title="Quanto mais melhor"
+          data-artist="Wilton Cruz"
+          data-country="São Paulo, Brasil"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="pdf"
+          data-src="pdfs/Cruz - Quanto mais melhor - 2025_20250831_223314_0000 - wilton cruz.pdf">
+          <h3 class="work-title">Quanto mais melhor</h3>
+          <div class="work-artist">Wilton Cruz</div>
+          <div class="work-meta-line">
+            <span class="work-country">São Paulo, Brasil</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>        
+
+        <article class="work-card"
+          data-title="CIGARRILLO DE MARIA WIESSE"
+          data-artist="Yuliana Mesía"
+          data-country="Lima, Perú"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="image"
+          data-src="imgs/MESÍA_CIGARRILLODEMARIAWIESSE_2025 - Yuliana Mesía Santiváñez.jpg">
+          <h3 class="work-title">CIGARRILLO DE MARIA WIESSE</h3>
+          <div class="work-artist">Yuliana Mesía</div>
+          <div class="work-meta-line">
+            <span class="work-country">Lima, Perú</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>  
+
+        <article class="work-card"
+          data-title="EXACTA DIMENSIÓN DE ROSÉ"
+          data-artist="Yuliana Mesía"
+          data-country="Lima, Perú"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="image"
+          data-src="imgs/MESÍA-EXACTADIMENSIÓNDEROSÉ-2025 - Yuliana Mesía Santiváñez.jpg">
+          <h3 class="work-title">EXACTA DIMENSIÓN DE ROSÉ</h3>
+          <div class="work-artist">Yuliana Mesía</div>
+          <div class="work-meta-line">
+            <span class="work-country">Lima, Perú</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>
+
+        <article class="work-card"
+          data-title="RETORNO CÍRCULO DE ROSÉ"
+          data-artist="Yuliana Mesía"
+          data-country="Lima, Perú"
+          data-year="2025"
+          data-medium="Poesía visual"
+          data-type="image"
+          data-src="imgs/MESÍA-RETORNOCÍRCULODEROSÉ-2025 - Yuliana Mesía Santiváñez.jpg">
+          <h3 class="work-title">RETORNO CÍRCULO DE ROSÉ</h3>
+          <div class="work-artist">Yuliana Mesía</div>
+          <div class="work-meta-line">
+            <span class="work-country">Lima, Perú</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: Poesía visual</div>
+        </article>
+
+        <article class="work-card"
+          data-title="Nanai"
+          data-artist="DaniBoy"
+          data-country="Lima, Perú"
+          data-year="2022"
+          data-medium=""
+          data-type="web"
+          data-src="https://michaelmobius.github.io/nanai/index.html">
+          <h3 class="work-title">Nanai</h3>
+          <div class="work-artist">DaniBoy</div>
+          <div class="work-meta-line">
+            <span class="work-country">Lima, Perú</span>
+            <span class="work-year">2022</span>
+          </div>
+          <div class="work-medium">Soporte: por completar</div>
+        </article>        
+
+        <article class="work-card"
+          data-title="Silence"
+          data-artist="Michael Hurtado"
+          data-country="Lima, Perú"
+          data-year="2025"
+          data-medium=""
+          data-type="web"
+          data-src="https://michaelmobius.github.io/silence/index.html">
+          <h3 class="work-title">Silence</h3>
+          <div class="work-artist">Michael Hurtado</div>
+          <div class="work-meta-line">
+            <span class="work-country">Lima, Perú</span>
+            <span class="work-year">2025</span>
+          </div>
+          <div class="work-medium">Soporte: por completar</div>
+        </article>
+
+        <article class="work-card"
+          data-title="Typewriter"
+          data-artist="Michael Hurtado"
+          data-country="Lima, Perú"
+          data-year="2021"
+          data-medium=""
+          data-type="web"
+          data-src="https://michaelhurtado.github.io/typewriter/index.html">
+          <h3 class="work-title">Typewriter</h3>
+          <div class="work-artist">Michael Hurtado</div>
+          <div class="work-meta-line">
+            <span class="work-country">Lima, Perú</span>
+            <span class="work-year">2021</span>
+          </div>
+          <div class="work-medium">Soporte: por completar</div>
+        </article>
+
+        <article class="work-card"
+          data-title="La poesía peruana"
+          data-artist="Michael Hurtado"
+          data-country="Lima, Perú"
+          data-year="2021"
+          data-medium=""
+          data-type="web"
+          data-src="https://michaelhurtado.github.io/la_poesia_peruana/index.html">
+          <h3 class="work-title">La poesía peruana</h3>
+          <div class="work-artist">Michael Hurtado</div>
+          <div class="work-meta-line">
+            <span class="work-country">Lima, Perú</span>
+            <span class="work-year">2021</span>
+          </div>
+          <div class="work-medium">Soporte: por completar</div>
+        </article>                 
+
       </div>
     </section>
 
@@ -5757,16 +5716,26 @@
     <img id="lightboxImage" alt="" />
   </div>
 
-  <script>
+<script>
+    // ELEMENTOS DOM
     const viewerTitle = document.getElementById('viewerTitle');
     const viewerArtist = document.getElementById('viewerArtist');
     const viewerCountry = document.getElementById('viewerCountry');
     const viewerYear = document.getElementById('viewerYear');
     const viewerMedia = document.getElementById('viewerMedia');
+    const gridContainer = document.getElementById('workGrid');
+    
+    // Controles
+    const searchInput = document.getElementById('searchArtist');
+    const countrySelect = document.getElementById('filterCountry');
+    const mediumSelect = document.getElementById('filterMedium');
+    const btnRandom = document.getElementById('btnRandom');
+    const btnReset = document.getElementById('btnReset');
 
-    const cards = Array.from(document.querySelectorAll('.work-card'));
+    // Convertimos a array para manipular
+    let allCards = Array.from(document.querySelectorAll('.work-card'));
 
-    // Lightbox
+    // Lightbox Logic
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxClose = document.getElementById('lightboxClose');
@@ -5783,36 +5752,82 @@
     }
 
     lightboxClose.addEventListener('click', closeLightbox);
-
     lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        closeLightbox();
-      }
+      if (e.target === lightbox) closeLightbox();
     });
-
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-      }
+      if (e.key === 'Escape') closeLightbox();
     });
 
     // =============================
-    // AGRUPAR TARJETAS POR AUTOR
+    // 1. LISTA OFICIAL DE PAÍSES Y FUNCIÓN DETECCIÓN
     // =============================
+    
+    const listaPaises = [
+      "Alemania", "Argentina", "Brasil", "Chile", "Colombia", 
+      "Ecuador", "España", "EUA", "Italia", "México", 
+      "Perú", "Portugal", "Uruguay", "Venezuela"
+    ];
 
+    function getCleanCountry(rawString) {
+      if (!rawString) return "";
+      const lowerRaw = rawString.toLowerCase();
+      // Buscamos si el texto contiene alguno de los países de la lista
+      const encontrado = listaPaises.find(pais => lowerRaw.includes(pais.toLowerCase()));
+      return encontrado || ""; // Devuelve el nombre limpio o vacío si no halla nada
+    }
+
+    function getSoporteLabel(type, src) {
+      const t = (type || '').toLowerCase();
+      const s = (src || '').toLowerCase();
+      if (t === 'pdf' || s.endsWith('.pdf')) return 'PDF';
+      if (t === 'video' || s.endsWith('.mp4')) return 'Video';
+      if (t === 'web' || s.endsWith('.html') || s.startsWith('http')) return 'Web';
+      return 'Imagen';
+    }
+
+    // =============================
+    // 2. AGRUPAR TARJETAS POR AUTOR Y PROCESAR DATOS
+    // =============================
     const groupsByArtist = new Map();
+    
+    // Conjuntos para los filtros
+    const uniqueCountries = new Set();
+    const uniqueMedia = new Set();
 
-    cards.forEach(card => {
+    allCards.forEach(card => {
       const artist = (card.dataset.artist || '').trim();
       if (!artist) return;
 
+      const rawType = card.dataset.type || 'image';
+      const rawSrc = card.dataset.src || '';
+      const autoMedium = getSoporteLabel(rawType, rawSrc);
+      const rawCountryText = card.dataset.country || '';
+      
+      // Aquí usamos la función nueva para extraer SOLO el país limpio
+      const cleanCountry = getCleanCountry(rawCountryText);
+
+      // Guardamos datos para llenar los select luego
+      if (cleanCountry) uniqueCountries.add(cleanCountry);
+      if (autoMedium) uniqueMedia.add(autoMedium);
+
+      // Actualizamos visualmente la tarjeta
+      const mediumEl = card.querySelector('.work-medium');
+      if (mediumEl) mediumEl.textContent = `Soporte: ${autoMedium}`;
+
+      // Asignamos atributos extra al DOM para el filtrado rápido
+      card.dataset.autoMedium = autoMedium; 
+      card.dataset.cleanCountry = cleanCountry; // Importante para el filtro
+      card.dataset.searchArtist = artist.toLowerCase();
+
       const workData = {
         title: card.dataset.title || card.querySelector('.work-title')?.textContent || '',
-        country: card.dataset.country || card.querySelector('.work-country')?.textContent || '',
+        country: rawCountryText, // Guardamos el texto original para el visor ("Lima, Perú")
+        cleanCountry: cleanCountry, // Guardamos el limpio para lógica interna
         year: card.dataset.year || card.querySelector('.work-year')?.textContent || '',
-        medium: card.dataset.medium || card.querySelector('.work-medium')?.textContent.replace(/^Soporte:\s*/i, ''),
-        type: (card.dataset.type || 'image').toLowerCase(),
-        src: card.dataset.src || ''
+        medium: autoMedium,
+        type: rawType.toLowerCase(),
+        src: rawSrc
       };
 
       if (!groupsByArtist.has(artist)) {
@@ -5820,11 +5835,84 @@
       } else {
         const group = groupsByArtist.get(artist);
         group.works.push(workData);
-        // esta tarjeta extra no se muestra; solo la usamos como data
-        card.remove();
+        card.remove(); 
       }
     });
 
+    // Lista de tarjetas visibles (principales)
+    let visibleCards = Array.from(document.querySelectorAll('.work-card'));
+
+    // =============================
+    // 3. CONFIGURAR TARJETAS AGRUPADAS (NAVEGACIÓN)
+    // =============================
+    groupsByArtist.forEach(({ mainCard, works }) => {
+      if (works.length <= 1) return;
+
+      mainCard._works = works;
+      mainCard._currentIndex = 0;
+
+      const nav = document.createElement('div');
+      nav.className = 'work-multi-nav';
+      nav.innerHTML = `
+        <button type="button" class="work-nav-btn work-nav-prev">◀</button>
+        <span class="work-counter">1 / ${works.length}</span>
+        <button type="button" class="work-nav-btn work-nav-next">▶</button>
+      `;
+      mainCard.appendChild(nav);
+
+      const prevBtn = nav.querySelector('.work-nav-prev');
+      const nextBtn = nav.querySelector('.work-nav-next');
+      const counter = nav.querySelector('.work-counter');
+
+      mainCard.applyWork = function(index) {
+        mainCard._currentIndex = index;
+        const w = works[index];
+
+        const titleEl = mainCard.querySelector('.work-title');
+        const yearEl = mainCard.querySelector('.work-year');
+        const mediumEl = mainCard.querySelector('.work-medium');
+
+        if (titleEl) titleEl.textContent = w.title || '[Obra sin título]';
+        if (yearEl) yearEl.textContent = w.year || '';
+        if (mediumEl) mediumEl.textContent = 'Soporte: ' + w.medium;
+
+        // Actualizar data attributes para el visor
+        mainCard.dataset.title = w.title || '';
+        mainCard.dataset.country = w.country || ''; // Original "Ciudad, País"
+        mainCard.dataset.year = w.year || '';
+        mainCard.dataset.medium = w.medium || '';
+        mainCard.dataset.type = w.type || 'image';
+        mainCard.dataset.src = w.src || '';
+        
+        // Actualizar datos de filtrado por si cambian entre obras del mismo autor
+        mainCard.dataset.autoMedium = w.medium;
+        mainCard.dataset.cleanCountry = w.cleanCountry;
+
+        counter.textContent = `${index + 1} / ${works.length}`;
+
+        if (mainCard.classList.contains('active')) {
+          showWork(mainCard);
+        }
+      };
+
+      prevBtn.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        const nextIndex = (mainCard._currentIndex - 1 + works.length) % works.length;
+        mainCard.applyWork(nextIndex);
+      });
+
+      nextBtn.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        const nextIndex = (mainCard._currentIndex + 1) % works.length;
+        mainCard.applyWork(nextIndex);
+      });
+      
+      mainCard.applyWork(0);
+    });
+
+    // =============================
+    // 4. FUNCIONALIDAD DEL VISOR
+    // =============================
     function showWork(card) {
       const title = card.dataset.title || card.querySelector('.work-title')?.textContent || '';
       const artist = card.dataset.artist || card.querySelector('.work-artist')?.textContent || '';
@@ -5837,154 +5925,126 @@
       viewerArtist.textContent = artist || '';
       viewerCountry.textContent = country ? country.toUpperCase() : '';
       viewerYear.textContent = year || '';
-
       viewerMedia.innerHTML = '';
 
       if (!src) {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'viewer-placeholder';
-        placeholder.textContent = 'Agrega un enlace a la imagen, video o PDF utilizando el atributo data-src de esta obra.';
-        viewerMedia.appendChild(placeholder);
+        viewerMedia.innerHTML = '<div class="viewer-placeholder">Selecciona una obra para ver.</div>';
         return;
       }
 
-            if (type === 'image' || type === 'paper') {
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = title || 'Obra seleccionada';
-
-        // Abrir lightbox al hacer click en la imagen
-        img.addEventListener('click', () => openLightbox(src, title));
-
-        viewerMedia.appendChild(img);
-
-      } else if (type === 'video') {
-        const iframe = document.createElement('iframe');
-        iframe.src = src;
-        iframe.allowFullscreen = true;
-        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-        iframe.loading = 'lazy';
-        viewerMedia.appendChild(iframe);
-
-      } else if (type === 'web') {
-        const iframe = document.createElement('iframe');
-        iframe.src = src;
-        iframe.loading = 'lazy';
-        iframe.setAttribute(
-          'sandbox',
-          'allow-scripts allow-same-origin allow-forms allow-popups'
-        );
-        viewerMedia.appendChild(iframe);
-
+      let content;
+      if (type === 'video' || src.endsWith('.mp4')) {
+        content = document.createElement('iframe');
+        content.allowFullscreen = true;
+      } else if (type === 'web' || type === 'html') {
+        content = document.createElement('iframe');
+        content.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups');
       } else if (type === 'pdf') {
-        const embed = document.createElement('embed');
-        embed.src = src;
-        embed.type = 'application/pdf';
-        viewerMedia.appendChild(embed);
-
+        content = document.createElement('embed');
+        content.type = 'application/pdf';
       } else {
-        const placeholder = document.createElement('div');
-        placeholder.className = 'viewer-placeholder';
-        placeholder.textContent = 'Tipo de obra no reconocido. Usa data-type="image", "video", "web" o "pdf".';
-        viewerMedia.appendChild(placeholder);
+        content = document.createElement('img');
+        content.alt = title;
+        content.style.cursor = 'zoom-in';
+        content.addEventListener('click', () => openLightbox(src, title));
       }
-
+      
+      content.src = src;
+      content.loading = 'lazy';
+      viewerMedia.appendChild(content);
     }
 
-    // Crear navegación interna (◀ ▶) en las tarjetas que tengan varias obras
-    groupsByArtist.forEach(({ mainCard, works }) => {
-      if (works.length <= 1) return; // solo una obra, nada que hacer
-
-      mainCard._works = works;
-      mainCard._currentIndex = 0;
-
-      const nav = document.createElement('div');
-      nav.className = 'work-multi-nav';
-
-      const prevBtn = document.createElement('button');
-      prevBtn.type = 'button';
-      prevBtn.className = 'work-nav-btn work-nav-prev';
-      prevBtn.textContent = '◀';
-
-      const counter = document.createElement('span');
-      counter.className = 'work-counter';
-
-      const nextBtn = document.createElement('button');
-      nextBtn.type = 'button';
-      nextBtn.className = 'work-nav-btn work-nav-next';
-      nextBtn.textContent = '▶';
-
-      nav.append(prevBtn, counter, nextBtn);
-      mainCard.appendChild(nav);
-
-      function applyWork(index) {
-        mainCard._currentIndex = index;
-        const w = works[index];
-
-        const titleEl = mainCard.querySelector('.work-title');
-        const yearEl = mainCard.querySelector('.work-year');
-        const mediumEl = mainCard.querySelector('.work-medium');
-
-        if (titleEl) titleEl.textContent = w.title || '[Obra sin título]';
-        if (yearEl) yearEl.textContent = w.year || '';
-        if (mediumEl) mediumEl.textContent = 'Soporte: ' + (w.medium || 'por completar');
-
-        // Actualizamos los data-* para que showWork use la obra correcta
-        mainCard.dataset.title = w.title || '';
-        mainCard.dataset.country = w.country || '';
-        mainCard.dataset.year = w.year || '';
-        mainCard.dataset.medium = w.medium || '';
-        mainCard.dataset.type = w.type || 'image';
-        mainCard.dataset.src = w.src || '';
-
-        counter.textContent = `${index + 1} / ${works.length}`;
-
-        if (mainCard.classList.contains('active')) {
-          showWork(mainCard);
-        }
-      }
-
-      prevBtn.addEventListener('click', (evt) => {
-        evt.stopPropagation(); // que no dispare el click de la tarjeta
-        const nextIndex = (mainCard._currentIndex - 1 + works.length) % works.length;
-        applyWork(nextIndex);
-      });
-
-      nextBtn.addEventListener('click', (evt) => {
-        evt.stopPropagation();
-        const nextIndex = (mainCard._currentIndex + 1) % works.length;
-        applyWork(nextIndex);
-      });
-
-      applyWork(0);
-    });
-
-    function clearActiveCards() {
-      cards.forEach(card => card.classList.remove('active'));
-    }
-
-    // Click en tarjeta: activar y hacer scroll al visor
-    cards.forEach(card => {
-      if (!document.body.contains(card)) return;
-      card.addEventListener('click', () => {
-        clearActiveCards();
-        card.classList.add('active');
-        showWork(card);
-
-        const viewer = document.getElementById('viewer');
-        viewer.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+    function attachCardEvents() {
+        const currentCards = document.querySelectorAll('.work-card');
+        currentCards.forEach(card => {
+            card.onclick = () => {
+                document.querySelectorAll('.work-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                showWork(card);
+                document.getElementById('viewer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            };
         });
-      });
+    }
+    attachCardEvents();
+
+    // =============================
+    // 5. LLENAR FILTROS
+    // =============================
+    
+    // Llenar Países (Ordenamos alfabéticamente la lista fija filtrada por los encontrados)
+    // Esto asegura que solo aparezcan en el select los países que realmente tienen obras
+    const sortedCountries = listaPaises.filter(p => uniqueCountries.has(p));
+    
+    sortedCountries.forEach(country => {
+      const opt = document.createElement('option');
+      opt.value = country; 
+      opt.textContent = country;
+      countrySelect.appendChild(opt);
     });
 
-    // Seleccionar automáticamente la primera obra visible al cargar (si existe)
-    const firstVisibleCard = cards.find(c => document.body.contains(c));
-    if (firstVisibleCard) {
-      firstVisibleCard.classList.add('active');
-      showWork(firstVisibleCard);
+    // Llenar Soportes
+    const sortedMedia = Array.from(uniqueMedia).sort();
+    sortedMedia.forEach(med => {
+      const opt = document.createElement('option');
+      opt.value = med;
+      opt.textContent = med;
+      mediumSelect.appendChild(opt);
+    });
+
+    // =============================
+    // 6. LÓGICA DE FILTRADO
+    // =============================
+    function filterGrid() {
+      const searchTerm = searchInput.value.toLowerCase().trim();
+      const selectedCountry = countrySelect.value;
+      const selectedMedium = mediumSelect.value;
+
+      visibleCards.forEach(card => {
+        const artist = card.dataset.searchArtist || '';
+        const cardCountry = card.dataset.cleanCountry || ''; // Usamos el país limpio
+        const cardMedium = card.dataset.autoMedium || '';
+
+        const matchSearch = artist.includes(searchTerm);
+        // Comparación exacta con el país limpio
+        const matchCountry = selectedCountry === '' || cardCountry === selectedCountry;
+        const matchMedium = selectedMedium === '' || cardMedium === selectedMedium;
+
+        if (matchSearch && matchCountry && matchMedium) {
+          card.style.display = ''; 
+        } else {
+          card.style.display = 'none'; 
+        }
+      });
     }
+
+    searchInput.addEventListener('input', filterGrid);
+    countrySelect.addEventListener('change', filterGrid);
+    mediumSelect.addEventListener('change', filterGrid);
+
+    // =============================
+    // 7. ORDEN ALEATORIO Y RESET
+    // =============================
+    btnRandom.addEventListener('click', () => {
+      const shuffled = [...visibleCards].sort(() => 0.5 - Math.random());
+      shuffled.forEach(card => gridContainer.appendChild(card));
+    });
+
+    btnReset.addEventListener('click', () => {
+      searchInput.value = '';
+      countrySelect.value = '';
+      mediumSelect.value = '';
+      filterGrid(); // Re-aplica el filtro vacío para mostrar todo
+      // Opcional: recargar la página si prefieres resetear el orden aleatorio también
+      // location.reload();
+    });
+
+    // Cargar primera obra
+    const first = document.querySelector('.work-card');
+    if(first) {
+        first.classList.add('active');
+        showWork(first);
+    }
+
   </script>
 </body>
 </html>
